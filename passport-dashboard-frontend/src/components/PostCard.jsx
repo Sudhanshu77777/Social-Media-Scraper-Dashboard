@@ -3,6 +3,8 @@ import { Card, Button, Badge, Collapse, Form, Spinner } from 'react-bootstrap';
 import { MessageCircle, Heart, Share2, Globe, ExternalLink, ShieldAlert, Sparkles, MapPin, ChevronDown, ChevronUp } from 'lucide-react';
 import axios from 'axios';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+
 function PostCard({ post }) {
   const [openThread, setOpenThread] = useState(false);
   const [currentText, setCurrentText] = useState(post.originalText);
@@ -33,7 +35,7 @@ function PostCard({ post }) {
 
     setTranslating(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/translate', {
+      const response = await axios.post(`${API_BASE}/translate`, {
         postId: post._id,
         targetLanguage: langCode
       });
