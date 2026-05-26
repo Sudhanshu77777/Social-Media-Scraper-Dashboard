@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "passport-dashboard-frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    },
+    {
+      "src": "passport-dashboard-backend/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "passport-dashboard-backend/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "passport-dashboard-frontend/$1"
+    }
+  ]
+}
